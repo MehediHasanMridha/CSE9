@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
 }
 ?>
 <br><br>
-<form action="">
+<form action="" method="get" enctype="multipart/form">
     <table class="table">
         <thead>
             <tr>
@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
         </thead>
         <tbody>
             <?php
-            $quarry = "SELECT * FROM file ORDER BY id DESC";
+            $quarry = "SELECT * FROM file ORDER BY roll ASC";
             $show = $db->select($quarry);
             if ($show) {
                 while ($result = $show->fetch_assoc()) {
@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
                         <td><?php echo $result['file']; ?></td>
                         <td>
                             <button type="button" class="btn btn-primary"><a href="?id=<?php echo $result['id']; ?>" style="text-decoration:none; color:white;">Delete</a></button>
-                            <button type="button" class="btn btn-primary"><a Download="<?php echo $result['file']; ?>" href="" style="text-decoration:none; color:white;">Download</a></button>
+                            <button type="button" class="btn btn-primary"><a href="<?php echo "../".$result['file']; ?>" style="text-decoration:none; color:white;" download>Download</a></button>
                         </td>
                     </tr>
             <?php

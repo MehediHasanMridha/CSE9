@@ -5,10 +5,11 @@ $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
 $msg = '';
 $err = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = strtoupper($_POST['name']);
+    $name = $_POST['name'];
     $roll = strtoupper($_POST['roll']);
     session::set('ggg', $roll);
     $date = $_POST['date'];
+    $date=$fm->formatDate($date);
     $session = $_POST['session'];
     $hall = $_POST['hall'];
     $image = $_FILES['file']['tmp_name'];
@@ -25,23 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             list($widthSignature, $heightSignature) = getimagesize($signature);
             $nCard = imagecreatetruecolor(2100, 1297);
             $mainCard = imagecreatefromjpeg('idCard/front.jpg');
-            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 10080, 6226);
-            $nImage = imagecreatetruecolor(472, 591);
+            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 8192, 5137);
+            $nImage = imagecreatetruecolor(394, 453);
             $mainImage = imagecreatefromjpeg($image);
-            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 472, 591, $widthFile, $heightFile);
-            imagecopy($nCard, $nImage, 200, 440, 0, 0, 472, 591);
+            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 394, 453, $widthFile, $heightFile);
+            imagecopy($nCard, $nImage, 1657, 420, 0, 0, 394, 453);
             $nSignature = imagecreatetruecolor(472, 113);
             $mainSignature = imagecreatefromjpeg($signature);
-            imagecopyresized($nSignature, $mainSignature, 0, 0, 0, 0, 500, 113, $widthSignature, $heightSignature);
-            imagecopy($nCard, $nSignature, 200, 1056, 0, 0, 472, 113);
-            $font = "font/Montserrat-Medium.ttf";
+            imagecopyresized($nSignature, $mainSignature, 0, 0, 0, 0, 472, 113, $widthSignature, $heightSignature);
+            imagecopy($nCard, $nSignature, 1550, 1075, 0, 0, 472, 113);
+            $font = "font/timr65w.ttf";
             $color1 = imagecolorallocate($nCard, 38, 86, 166);
-            imagefttext($nCard, 50, 0, 969, 470, $color1, realpath($font), $name);
+            imagefttext($nCard, 50, 0, 345, 523, $color, realpath($font), $name);
             $color = imagecolorallocate($nCard, 19, 21, 22);
-            imagefttext($nCard, 36, 0, 1629, 900, $color, realpath($font), $roll);
-            imagefttext($nCard, 36, 0, 970, 750, $color, realpath($font), $date);
-            imagefttext($nCard, 36, 0, 970, 900, $color, realpath($font), $session);
-            imagefttext($nCard, 36, 0, 965, 1020, $color, realpath($font), $hall);
+            imagefttext($nCard, 48, 0, 500, 848, $color, realpath($font), $roll);
+            imagefttext($nCard, 48, 0, 573, 627, $color, realpath($font), $date);
+            imagefttext($nCard, 48, 0, 1360, 850, $color, realpath($font), $session);
+            imagefttext($nCard, 48, 0, 280, 940, $color, realpath($font), $hall);
             imagejpeg($nCard, "output/" . $roll . 'f.jpg');
             header("Location:viewId.php");
         } elseif ($_FILES['file']['type'] == 'image/jpeg' && $_FILES['signature']['type'] == 'image/png') {
@@ -49,23 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             list($widthSignature, $heightSignature) = getimagesize($signature);
             $nCard = imagecreatetruecolor(2100, 1297);
             $mainCard = imagecreatefromjpeg('idCard/front.jpg');
-            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 10080, 6226);
+            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 8192, 5137);
             $nImage = imagecreatetruecolor(472, 591);
             $mainImage = imagecreatefromjpeg($image);
-            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 472, 591, $widthFile, $heightFile);
-            imagecopy($nCard, $nImage, 200, 440, 0, 0, 472, 591);
+            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 394, 453, $widthFile, $heightFile);
+            imagecopy($nCard, $nImage, 1657, 420, 0, 0, 394, 453);
             $nSignature = imagecreatetruecolor(472, 113);
             $mainSignature = imagecreatefrompng($signature);
             imagecopyresized($nSignature, $mainSignature, 0, 0, 0, 0, 500, 113, $widthSignature, $heightSignature);
-            imagecopy($nCard, $nSignature, 200, 1056, 0, 0, 472, 113);
-            $font = "font/Montserrat-Medium.ttf";
+            imagecopy($nCard, $nSignature, 1550, 1075, 0, 0, 472, 113);
+            $font = "font/timr65w.ttf";
             $color1 = imagecolorallocate($nCard, 38, 86, 166);
-            imagefttext($nCard, 50, 0, 969, 470, $color1, realpath($font), $name);
+            imagefttext($nCard, 50, 0, 345, 523, $color, realpath($font), $name);
             $color = imagecolorallocate($nCard, 19, 21, 22);
-            imagefttext($nCard, 36, 0, 1629, 900, $color, realpath($font), $roll);
-            imagefttext($nCard, 36, 0, 970, 750, $color, realpath($font), $date);
-            imagefttext($nCard, 36, 0, 970, 900, $color, realpath($font), $session);
-            imagefttext($nCard, 36, 0, 965, 1020, $color, realpath($font), $hall);
+            imagefttext($nCard, 48, 0, 500, 848, $color, realpath($font), $roll);
+            imagefttext($nCard, 48, 0, 573, 627, $color, realpath($font), $date);
+            imagefttext($nCard, 48, 0, 1360, 850, $color, realpath($font), $session);
+            imagefttext($nCard, 48, 0, 280, 940, $color, realpath($font), $hall);
             imagejpeg($nCard, "output/" . $roll . 'f.jpg');
             header("Location:viewId.php");
         } elseif ($_FILES['file']['type'] == 'image/png' && $_FILES['signature']['type'] == 'image/jpeg') {
@@ -73,23 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             list($widthSignature, $heightSignature) = getimagesize($signature);
             $nCard = imagecreatetruecolor(2100, 1297);
             $mainCard = imagecreatefromjpeg('idCard/front.jpg');
-            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 10080, 6226);
+            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 8192, 5137);
             $nImage = imagecreatetruecolor(472, 591);
             $mainImage = imagecreatefrompng($image);
-            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 472, 591, $widthFile, $heightFile);
-            imagecopy($nCard, $nImage, 200, 440, 0, 0, 472, 591);
+            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 394, 453, $widthFile, $heightFile);
+            imagecopy($nCard, $nImage, 1657, 420, 0, 0, 394, 453);
             $nSignature = imagecreatetruecolor(472, 113);
             $mainSignature = imagecreatefromjpeg($signature);
             imagecopyresized($nSignature, $mainSignature, 0, 0, 0, 0, 500, 113, $widthSignature, $heightSignature);
-            imagecopy($nCard, $nSignature, 200, 1056, 0, 0, 472, 113);
-            $font = "font/Montserrat-Medium.ttf";
+            imagecopy($nCard, $nSignature, 1550, 1075, 0, 0, 472, 113);
+            $font = "font/timr65w.ttf";
             $color1 = imagecolorallocate($nCard, 38, 86, 166);
-            imagefttext($nCard, 50, 0, 969, 470, $color1, realpath($font), $name);
+            imagefttext($nCard, 50, 0, 345, 523, $color, realpath($font), $name);
             $color = imagecolorallocate($nCard, 19, 21, 22);
-            imagefttext($nCard, 36, 0, 1629, 900, $color, realpath($font), $roll);
-            imagefttext($nCard, 36, 0, 970, 750, $color, realpath($font), $date);
-            imagefttext($nCard, 36, 0, 970, 900, $color, realpath($font), $session);
-            imagefttext($nCard, 36, 0, 965, 1020, $color, realpath($font), $hall);
+            imagefttext($nCard, 48, 0, 500, 848, $color, realpath($font), $roll);
+            imagefttext($nCard, 48, 0, 573, 627, $color, realpath($font), $date);
+            imagefttext($nCard, 48, 0, 1360, 850, $color, realpath($font), $session);
+            imagefttext($nCard, 48, 0, 280, 940, $color, realpath($font), $hall);
             imagejpeg($nCard, "output/" . $roll . 'f.jpg');
             header("Location:viewId.php");
         } elseif ($_FILES['file']['type'] == 'image/png' && $_FILES['signature']['type'] == 'image/png') {
@@ -97,23 +98,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             list($widthSignature, $heightSignature) = getimagesize($signature);
             $nCard = imagecreatetruecolor(2100, 1297);
             $mainCard = imagecreatefromjpeg('idCard/front.jpg');
-            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 10080, 6226);
+            imagecopyresized($nCard, $mainCard, 0, 0, 0, 0, 2100, 1297, 8192, 5137);
             $nImage = imagecreatetruecolor(472, 591);
             $mainImage = imagecreatefrompng($image);
-            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 472, 591, $widthFile, $heightFile);
-            imagecopy($nCard, $nImage, 200, 440, 0, 0, 472, 591);
+            imagecopyresized($nImage, $mainImage, 0, 0, 0, 0, 394, 453, $widthFile, $heightFile);
+            imagecopy($nCard, $nImage, 1657, 420, 0, 0, 394, 453);
             $nSignature = imagecreatetruecolor(472, 113);
             $mainSignature = imagecreatefrompng($signature);
             imagecopyresized($nSignature, $mainSignature, 0, 0, 0, 0, 500, 113, $widthSignature, $heightSignature);
-            imagecopy($nCard, $nSignature, 200, 1056, 0, 0, 472, 113);
-            $font = "font/Montserrat-Medium.ttf";
+            imagecopy($nCard, $nSignature, 1550, 1075, 0, 0, 472, 113);
+            $font = "font/timr65w.ttf";
             $color1 = imagecolorallocate($nCard, 38, 86, 166);
-            imagefttext($nCard, 50, 0, 969, 470, $color1, realpath($font), $name);
+            imagefttext($nCard, 50, 0, 345, 523, $color, realpath($font), $name);
             $color = imagecolorallocate($nCard, 19, 21, 22);
-            imagefttext($nCard, 36, 0, 1629, 900, $color, realpath($font), $roll);
-            imagefttext($nCard, 36, 0, 970, 750, $color, realpath($font), $date);
-            imagefttext($nCard, 36, 0, 970, 900, $color, realpath($font), $session);
-            imagefttext($nCard, 36, 0, 965, 1020, $color, realpath($font), $hall);
+            imagefttext($nCard, 48, 0, 500, 848, $color, realpath($font), $roll);
+            imagefttext($nCard, 48, 0, 573, 627, $color, realpath($font), $date);
+            imagefttext($nCard, 48, 0, 1360, 850, $color, realpath($font), $session);
+            imagefttext($nCard, 48, 0, 280, 940, $color, realpath($font), $hall);
             imagejpeg($nCard, "output/" . $roll . 'f.jpg');
             header("Location:viewId.php");
         } else {
@@ -129,15 +130,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $source = imagecreatefromjpeg('idCard/Back.jpg');
         imagecopyresized($newimage, $source, 0, 0, 0, 0, 2100, 1297, 8191, 5059);
         $stamp = imagecreatefrompng($Barcode);
-        imagecopy($newimage, $stamp, 695, 1025, 0, 0, 738, 116);
-        $font = "font/Montserrat-Light.ttf";
+        imagecopy($newimage, $stamp, 695, 1100, 0, 0, 754, 128);
+        $font = "font/Time Roman Bold.ttf";
         $color = imagecolorallocate($newimage, 19, 21, 22);
-        imagefttext($newimage, 36, 0, 1450, 468, $color, realpath($font), $village . " ,");
-        imagefttext($newimage, 36, 0, 1370, 530, $color, realpath($font), $postOffice . " ,");
-        imagefttext($newimage, 36, 0, 1360, 585, $color, realpath($font), $thana . " ,");
-        imagefttext($newimage, 36, 0, 1455, 650, $color, realpath($font), $district . " ,");
-        imagefttext($newimage, 36, 0, 1470, 710, $color, realpath($font), $division);
-        imagefttext($newimage, 36, 0, 565, 478, $color, realpath($font), $bl);
+        imagefttext($newimage, 46, 0, 860, 624, $color, realpath($font), $village);
+        imagefttext($newimage, 46, 0, 860, 711, $color, realpath($font), $postOffice);
+        imagefttext($newimage, 46, 0, 1555, 624, $color, realpath($font), $thana);
+        imagefttext($newimage, 46, 0, 1555, 711, $color, realpath($font), $district);
+        // imagefttext($newimage, 46, 0, 1470, 710, $color, realpath($font), $division);
+        imagefttext($newimage, 48, 0, 540, 550, $color, realpath($font), $bl);
         imagejpeg($newimage, "output/" . $roll . 'b.jpg');
     } else {
         $msg = "Please Fill The All Box";
@@ -215,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <option value="" selected>Select Hall</option>
                                 <option value="Shadhinota Dibos">Shadhinota Dibos Hall</option>
                                 <option value="Bijoy Dibos">Bijoy Dibos Hall</option>
-                                <option value="Sheikh Rasel">Sheikh Rasel Hall</option>
+                                <option value="Sheikh Russel">Sheikh Russel Hall</option>
                                 <option value="Bangamata Sheikh Fazilatunnesa Mujib">Bangamata Sheikh Fazilatunnesa Mujib Hall
                                 </option>
                                 <option value="Sheikh Rehana">Sheikh Rehana Hall</option>

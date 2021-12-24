@@ -2,18 +2,19 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
-    $roll = $_POST['roll'];
+    $roll = strtoupper($_POST['roll']);
     $name = mysqli_real_escape_string($db->link, $name);
     $roll = mysqli_real_escape_string($db->link, $roll);
 
     $file_name = $_FILES['image']['name'];
     $file_size = $_FILES['image']['size'];
     $file_temp = $_FILES['image']['tmp_name'];
+    $file_type = $_FILES['image']['type'];
 
     $div = explode('.', $file_name);
     $file_ext = strtolower(end($div));
     $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
-    $uploaded_image = "upload/" . $file_name;
+    $uploaded_image = "upload/" .$roll.'--'. $file_name;
     $err = "";
     $sub = '';
     if ($name == '' || $roll == '' || $file_name == '') {
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 Your File:
             </td>
             <td>
-                <input type="file" name="image">
+                <input type="file" name="image" style="color:white;">
                 <br><br>
                 <input type="submit" class="btn btn-primary" value="submit">
             </td>

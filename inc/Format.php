@@ -3,7 +3,7 @@
     {
         public function formatDate($date)
         {
-           return date("F j, y , g:i a", strtotime($date));
+           return date("d-m-Y", strtotime($date));
         }
         public function textShorten($text, $limit = 400){
             $text = $text. " ";
