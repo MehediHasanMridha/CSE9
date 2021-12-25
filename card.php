@@ -278,18 +278,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td>
                     <div class="row">
                         <div class="col-4 text-light">
-                            <p>Division:</p>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" name="division" style="width: 100%;">
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr style="background: #141E30;background: -webkit-linear-gradient(to right, #243B55, #141E30);background: linear-gradient(to right, #243B55, #141E30);">
-                <td>
-                    <div class="row">
-                        <div class="col-4 text-light">
                             <p>Blood:</p>
                         </div>
                         <div class="col-8">
