@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $postOffice = $_POST['postOffice'];
     $thana = $_POST['thana'];
     $district = $_POST['district'];
-    $division = $_POST['division'];
     $bl = strtoupper($_POST['bl']);
     if ($name != "" && $roll != "" && $date != "" && $session != "" && $hall != "" && $image != "" && $signature != "") {
         if ($_FILES['file']['type'] == 'image/jpeg' && $_FILES['signature']['type'] == 'image/jpeg') {
@@ -123,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $msg = "Please Fill The All Box ";
     }
-    if ($village != "" && $postOffice != "" && $thana != "" && $district != "" && $division != "") {
+    if ($village != "" && $postOffice != "" && $thana != "" && $district != "") {
         file_put_contents('output/' . $roll . 'barcode.png', $generator->getBarcode($roll,  $generator::TYPE_CODE_128, 6, 116));
         $Barcode = 'output/' . $roll . 'barcode.png';
         $newimage = imagecreatetruecolor(2100, 1300);
@@ -137,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         imagefttext($newimage, 46, 0, 860, 711, $color, realpath($font), $postOffice);
         imagefttext($newimage, 46, 0, 1555, 624, $color, realpath($font), $thana);
         imagefttext($newimage, 46, 0, 1555, 711, $color, realpath($font), $district);
-        // imagefttext($newimage, 46, 0, 1470, 710, $color, realpath($font), $division);
         imagefttext($newimage, 48, 0, 540, 550, $color, realpath($font), $bl);
         imagejpeg($newimage, "output/" . $roll . 'b.jpg');
     } else {
@@ -216,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <option value="" selected>Select Hall</option>
                                 <option value="Shadhinota Dibos">Shadhinota Dibos Hall</option>
                                 <option value="Bijoy Dibos">Bijoy Dibos Hall</option>
-                                <option value="Sheikh Russel">Sheikh Russel Hall</option>
+                                <option value="Sheikh Rasel">Sheikh Rasel Hall</option>
                                 <option value="Bangamata Sheikh Fazilatunnesa Mujib">Bangamata Sheikh Fazilatunnesa Mujib Hall
                                 </option>
                                 <option value="Sheikh Rehana">Sheikh Rehana Hall</option>
