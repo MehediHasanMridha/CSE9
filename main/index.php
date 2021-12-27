@@ -1,6 +1,16 @@
 <?php include "header.php"; ?>
+<?php $count=0;?>
 <form action="">
   <table class="table">
+    <?php 
+    $quarry = "SELECT * FROM student";
+    $show = $db->select($quarry);
+    $result=mysqli_num_rows($show);
+    ?>
+    <br>
+    <h4> Total Students: <?php echo $result;?></h4>
+    <br>
+    
     <thead>
       <tr>
         <th>Name</th>
