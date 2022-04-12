@@ -2,7 +2,7 @@
 <?php
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $quarry = "DELETE FROM teacher WHERE id='$id'";
+  $quarry = "DELETE FROM admin WHERE id='$id'";
   $Del = $db->delete($quarry);
 }
 ?>
