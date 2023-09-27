@@ -2,5 +2,5 @@
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_NAME", "attendance");
+define("DB_NAME", "CSE9");
 define("TITLE", "Mehedi_Hasan");
